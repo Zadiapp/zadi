@@ -1,0 +1,58 @@
+version: '3'
+services:
+
+  # The Application
+  app:
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=mysqldb"
+
+  # The Web Server
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    working_dir: /var/www
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+      - mysqldb
+
+  # The Database
+  mysqldb:
+      image: mysql:5.7
+      container_name: mysqldb
+      restart: always
+      env_file:
+          - ".env"
+      environment:
+          - MYSQL_DATABASE=${DB_DATABASE}
+          - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+          - MYSQL_USER=${DB_USERNAME}
+          - MYSQL_PASSWORD=${DB_PASSWORD}
+      ports:
+          - "3306:3306"
+      volumes:
+          - "/Users/ahmedalawady/Workspace/crowdanalyzer/dump/mysql:/var/lib/mysql"
+
+  # myadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: phpmyadmin
+  #   ports:
+  #       - "8080:80"
+  #   environment:
+  #       - PMA_ARBITRARY=1
+  #       - PMA_HOST=mysqldb
+  #   restart: always
+  #   depends_on:
+  #       - mysqldb
+
+volumes:
+  data-volume:
