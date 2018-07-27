@@ -11,8 +11,7 @@ class ConfigSeeder extends Seeder
      */
     public function run()
     {
-        //
-        DB::table('app-config')->insert([
+        DB::table('app_config')->insert([
             'distance' => '5',
         ]);
     }

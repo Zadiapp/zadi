@@ -2,11 +2,7 @@
 
 namespace App\Services;
 
-use Illuminate\Database\Eloquent\Model;
-
-
 class UserService{
-    protected $user, $device;
 
     public function createGuest($request) {
         $user = \App\Models\User::create([

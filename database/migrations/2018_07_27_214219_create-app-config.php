@@ -14,7 +14,7 @@ class CreateAppConfig extends Migration
     public function up()
     {
         //
-        Schema::create('app-config', function (Blueprint $table) {
+        Schema::create('app_config', function (Blueprint $table) {
             $table->increments('id');
             $table->string('distance');
             $table->timestamps();
@@ -33,6 +33,6 @@ class CreateAppConfig extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('app-config');
+        Schema::dropIfExists('app_config');
     }
 }
