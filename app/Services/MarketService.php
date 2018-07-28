@@ -20,4 +20,19 @@ class MarketService{
 
         return $markets;
     }
+
+    public function createSuggestionMarket($request, $userId) {
+        $market = \App\Models\SuggestionMarket::create([
+            'user_id' => $userId,
+            'name' => $request->input('name'), 
+            'note' => $request->input('note'),
+            'phone' => $request->input('phone'),
+            'mobile' => $request->input('mobile'),
+            'address' => $request->input('address'),
+            'latitude' => $request->input('latitude'),
+            'longitude' => $request->input('longitude')
+        ]);
+
+        return $market;
+    }
 }

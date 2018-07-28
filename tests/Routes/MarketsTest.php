@@ -88,7 +88,7 @@ class MarketsTest extends TestCase
      
         $this->assertEquals($response->status, true);
         $this->assertEquals($response->validation, null);
-        $this->assertEquals($response->itemsCount, null);
+        $this->assertEquals($response->itemsCount, 2);
         $this->assertTrue(is_array($response->data));
         $this->assertEquals(2,count($response->data));
         $this->assertEquals($response->data[0]->address, '45 Albert Al Awal, Ezbet Saad, Qism Sidi Gabir, Alexandria Governorate');

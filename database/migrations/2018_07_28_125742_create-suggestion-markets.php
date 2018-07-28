@@ -16,15 +16,12 @@ class CreateSuggestionMarkets extends Migration
         Schema::create('suggestion_markets', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email')->nullable();
-            $table->string('opening_hour')->nullable();
             $table->string('mobile')->unique()->nullable();
             $table->string('phone')->unique()->nullable();
             $table->string('address')->nullable();
-            $table->string('min_charge')->nullable();
             $table->string('note')->nullable();
             $table->integer('status')->nullable();
-            $table->string('user_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->engine = 'InnoDB';

@@ -23,6 +23,28 @@ class MarketsController extends Controller
         }
 
         $markets = (new MarketService())->nearBy($request->get('latitude'), $request->get('longitude'));
-        return $this->getSuccResponse($markets);
+        return $this->getSuccResponse($markets, count($markets));
+    }
+
+
+    public function suggestMarket(Request $request)
+    {
+        $user = \Auth::user();
+
+        $validationRules = array(
+            'name' => 'required|min:2|max:25',
+            'address' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'mobile' => 'digits_between:7,15'
+        );
+
+        $validator = Validator::make($request->all(), $validationRules);
+        if ($validator->fails()) {
+            return $this->GetErrorResponse($validator->errors());
+        }
+    
+        $market = (new MarketService())->createSuggestionMarket($request, $user->id);
+        return $this->getSuccResponse($market);
     }
 }
