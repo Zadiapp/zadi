@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('register-guest', 'AuthController@registerGuest');
 
-Route::group(['prefix' => 'markets'], function () {
+Route::group(['prefix' => 'markets','middleware' => ['jwt.auth']],  function () {
     Route::get('nearby', 'MarketsController@nearBy');
 });
 

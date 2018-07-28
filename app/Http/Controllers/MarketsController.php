@@ -14,7 +14,7 @@ class MarketsController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('auth:api');
+       // $this->middleware('jwt-auth');
     }
     
     public function nearBy(Request $request)

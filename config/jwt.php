@@ -100,7 +100,7 @@ return [
     |
     */
 
-    'ttl' => env('JWT_TTL', 60),
+    'ttl' => env('JWT_TTL', 20160),
 
     /*
     |--------------------------------------------------------------------------
@@ -134,6 +134,18 @@ return [
     */
 
     'algo' => env('JWT_ALGO', 'HS256'),
+
+     /*
+    |--------------------------------------------------------------------------
+    | User Model namespace
+    |--------------------------------------------------------------------------
+    |
+    | Specify the full namespace to your User model.
+    | e.g. 'Acme\Entities\User'
+    |
+    */
+
+    'user' => 'App\Models\User',
 
     /*
     |--------------------------------------------------------------------------
@@ -213,6 +225,18 @@ return [
 
         /*
         |--------------------------------------------------------------------------
+        | User Provider
+        |--------------------------------------------------------------------------
+        |
+        | Specify the provider that is used to find the user based
+        | on the subject claim
+        |
+        */
+
+        'user' => 'Tymon\JWTAuth\Providers\User\EloquentUserAdapter',
+
+        /*
+        |--------------------------------------------------------------------------
         | JWT Provider
         |--------------------------------------------------------------------------
         |
@@ -220,7 +244,7 @@ return [
         |
         */
 
-        'jwt' => Tymon\JWTAuth\Providers\JWT\Namshi::class,
+        'jwt' => 'Tymon\JWTAuth\Providers\JWT\NamshiAdapter',
 
         /*
         |--------------------------------------------------------------------------
@@ -231,19 +255,18 @@ return [
         |
         */
 
-        'auth' => Tymon\JWTAuth\Providers\Auth\Illuminate::class,
+        'auth' => 'Tymon\JWTAuth\Providers\Auth\IlluminateAuthAdapter',
 
         /*
         |--------------------------------------------------------------------------
         | Storage Provider
         |--------------------------------------------------------------------------
         |
-        | Specify the provider that is used to store tokens in the blacklist.
+        | Specify the provider that is used to store tokens in the blacklist
         |
         */
 
-        'storage' => Tymon\JWTAuth\Providers\Storage\Illuminate::class,
-
+        'storage' => 'Tymon\JWTAuth\Providers\Storage\IlluminateCacheAdapter',
     ],
 
 ];
