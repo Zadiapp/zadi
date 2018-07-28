@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Device;
+use App\Services\UserService;
 use Validator;
 use Input;
 use JWTAuth;
@@ -37,8 +36,7 @@ class AuthController extends Controller
             return $this->GetErrorResponse($validator->errors());
         }
 
-        $user = (new User())->createGuest($request);
-        
-        return $this->getSuccResponse(JWTAuth::fromUser($user));
+        $guest = (new UserService())->createGuest($request);
+        return $this->getSuccResponse(JWTAuth::fromUser($guest));
     }
 }
