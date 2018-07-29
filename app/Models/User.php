@@ -13,5 +13,9 @@ class User extends Authenticatable
     public function devices() {
         return $this->hasMany('App\Models\Device');
     }
+    
+    public function suggestionMarkets() {
+        return $this->hasMany('App\Models\SuggestionMarket');
+    }
 }
 

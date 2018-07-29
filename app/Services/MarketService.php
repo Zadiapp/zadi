@@ -20,4 +20,15 @@ class MarketService{
 
         return $markets;
     }
+
+    public function createSuggestionMarket($suggestMarket, $userId) {
+        $suggestMarket['user_id'] = $userId;
+        $suggestMarket['status'] = \Config::get('constants.suggestionMarketsStatus.underInvestigation');
+        
+        if(isset($suggestMarket['latitude']) && isset($suggestMarket['longitude'])) {
+            $suggestMarket['location'] = \DB::raw('POINT('.$suggestMarket['latitude'].', '.$suggestMarket['longitude'].')');
+        }
+        
+        return \App\Models\SuggestionMarket::create($suggestMarket);
+    }
 }

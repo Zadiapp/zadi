@@ -17,5 +17,6 @@ Route::post('register-guest', 'AuthController@registerGuest');
 
 Route::group(['prefix' => 'markets','middleware' => ['jwt.auth']],  function () {
     Route::get('nearby', 'MarketsController@nearBy');
+    Route::post('suggest', 'MarketsController@suggestMarket');
 });
 
