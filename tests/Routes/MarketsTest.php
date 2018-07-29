@@ -80,7 +80,7 @@ class MarketsTest extends TestCase
     */
     public function testHappyScenarios(string $token) {
         $response = $this->get(
-            '/api/markets/nearby?latitude=31.185971&longitude=29.906160', 
+            '/api/markets/nearby?latitude=31.214838&longitude=29.939324', 
             ['HTTP_Authorization' => 'Bearer' . $token]
         )->response->getContent();
         

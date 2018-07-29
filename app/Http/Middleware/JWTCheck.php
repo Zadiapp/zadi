@@ -19,15 +19,15 @@ class JWTCheck extends GetUserFromToken
     {
         $response = new \App\Http\Controllers\Controller();
         if (! $token = $this->auth->setRequest($request)->getToken()) {
-            return $response->getErrorResponse('token_not_provided', null, 400);
+            return $response->getErrorResponse('token_not_provided', null, 403);
         }
 
         try {
             $user = $this->auth->authenticate($token);
         } catch (TokenExpiredException $e) {
-            return $response->getErrorResponse('token_expired', null, $e->getStatusCode());
+            return $response->getErrorResponse('token_expired', null, $e->getStatusCode(), null, 403);
         } catch (JWTException $e) {
-            return $response->getErrorResponse('token_invalid', null, $e->getStatusCode());
+            return $response->getErrorResponse('token_invalid', null, $e->getStatusCode(), null, 403);
         }
 
         if (! $user) {
