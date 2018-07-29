@@ -33,7 +33,7 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), $validationRules);
         if ($validator->fails()) {
-            return $this->GetErrorResponse($validator->errors());
+            return $this->GetErrorResponse($validator->errors(), null, 400);
         }
 
         $guest = (new UserService())->createGuest($request);

@@ -19,7 +19,7 @@ class MarketsController extends Controller
 
         $validator = Validator::make($request->all(), $validationRules);
         if ($validator->fails()) {
-            return $this->GetErrorResponse($validator->errors());
+            return $this->GetErrorResponse($validator->errors(), null, 400);
         }
 
         $markets = (new MarketService())->nearBy($request->get('latitude'), $request->get('longitude'));
@@ -42,7 +42,7 @@ class MarketsController extends Controller
 
         $validator = Validator::make($request->all(), $validationRules);
         if ($validator->fails()) {
-            return $this->GetErrorResponse($validator->errors());
+            return $this->GetErrorResponse($validator->errors(), null, 400);
         }
     
         $market = (new MarketService())->createSuggestionMarket($request->all(), $user->id);
