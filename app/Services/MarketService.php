@@ -29,7 +29,6 @@ class MarketService{
             $suggestMarket['location'] = \DB::raw('POINT('.$suggestMarket['latitude'].', '.$suggestMarket['longitude'].')');
         }
         
-        $market = \App\Models\SuggestionMarket::create($suggestMarket);
-        return $market;
+        return \App\Models\SuggestionMarket::create($suggestMarket);
     }
 }
