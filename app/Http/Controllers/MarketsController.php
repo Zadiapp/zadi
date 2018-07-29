@@ -36,7 +36,8 @@ class MarketsController extends Controller
             'address' => 'required',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'mobile' => 'digits_between:7,15'
+            'mobile' => 'digits_between:7,15',
+            'phone' => 'digits_between:7,15',
         );
 
         $validator = Validator::make($request->all(), $validationRules);
@@ -44,7 +45,7 @@ class MarketsController extends Controller
             return $this->GetErrorResponse($validator->errors());
         }
     
-        $market = (new MarketService())->createSuggestionMarket($request, $user->id);
+        $market = (new MarketService())->createSuggestionMarket($request->all(), $user->id);
         return $this->getSuccResponse($market);
     }
 }

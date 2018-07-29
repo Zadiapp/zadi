@@ -18,8 +18,8 @@ class CreateMarkets extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('opening_hour')->nullable();
-            $table->string('mobile')->unique()->nullable();
-            $table->string('phone')->unique()->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('delivery_speed')->nullable();
             $table->string('accuracy')->nullable();

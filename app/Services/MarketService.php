@@ -21,18 +21,13 @@ class MarketService{
         return $markets;
     }
 
-    public function createSuggestionMarket($request, $userId) {
-        $market = \App\Models\SuggestionMarket::create([
-            'user_id' => $userId,
-            'name' => $request->input('name'), 
-            'note' => $request->input('note'),
-            'phone' => $request->input('phone'),
-            'mobile' => $request->input('mobile'),
-            'address' => $request->input('address'),
-            'latitude' => $request->input('latitude'),
-            'longitude' => $request->input('longitude')
-        ]);
-
+    public function createSuggestionMarket($suggestMarket, $userId) {
+        $suggestMarket['user_id'] = $userId;
+        if(isset($suggestMarket['latitude']) && isset($suggestMarket['longitude'])) {
+            $suggestMarket['location'] = \DB::raw('POINT('.$suggestMarket['latitude'].', '.$suggestMarket['longitude'].')');
+        }
+        
+        $market = \App\Models\SuggestionMarket::create($suggestMarket);
         return $market;
     }
 }

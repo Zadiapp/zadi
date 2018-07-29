@@ -16,8 +16,8 @@ class CreateSuggestionMarkets extends Migration
         Schema::create('suggestion_markets', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('mobile')->unique()->nullable();
-            $table->string('phone')->unique()->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('note')->nullable();
             $table->integer('status')->nullable();
