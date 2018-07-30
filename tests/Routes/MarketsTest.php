@@ -78,7 +78,7 @@ class MarketsTest extends TestCase
     /**
      * @depends testValidationNumber
     */
-    public function testHappyScenarios(string $token) {
+    public function testNearByHappyScenarios(string $token) {
         $response = $this->get(
             '/api/markets/nearby?latitude=31.214838&longitude=29.939324', 
             ['HTTP_Authorization' => 'Bearer' . $token]
@@ -94,5 +94,52 @@ class MarketsTest extends TestCase
         $this->assertEquals($response->data[0]->address, '45 Albert Al Awal, Ezbet Saad, Qism Sidi Gabir, Alexandria Governorate');
         $this->assertEquals($response->data[1]->address, 'El Guish Rd.، SAN STEFANO، Qism El-Raml, Alexandria Governorate');
 
+    }
+
+    /**
+     * @depends testValidationNumber
+    */
+    public function testSuggestHappyScenarios(string $token) {
+        $params = [
+            'name' => 'SuperMarket',
+            'address' => 'Cairo',
+            'latitude' => '313333.9',
+            'longitude' => '2100.9',
+            'mobile' => '010100101010'
+        ];
+        $response = $this->call('POST','/api/markets/suggest',
+            $params,[],[],['HTTP_Authorization' => 'Bearer ' . $token],[]);
+    
+        $response = json_decode($response->content());
+
+        $this->assertEquals($response->status, true);
+        $this->assertEquals($response->validation, null);
+        $this->assertEquals($response->itemsCount, null);
+        $this->assertTrue(is_object($response->data));
+        $this->assertEquals($response->data->status, Config::get('constants.suggestionMarketsStatus.underInvestigation'));
+    }
+
+    /**
+     * @depends testValidationNumber
+    */
+    public function testSuggestValidation(string $token) {
+        $params = [
+            'name' => 'SuperMareeeeewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwket',
+            'mobile' => '0'
+        ];
+        $response = $this->call('POST','/api/markets/suggest',
+            $params,[],[],['HTTP_Authorization' => 'Bearer ' . $token],[]);
+    
+        $response = json_decode($response->content());
+        
+        $this->assertEquals($response->status, false);
+        $this->assertEquals($response->data, null);
+        $this->assertEquals($response->itemsCount, null);
+        $this->assertTrue(is_object($response->validation));
+        $this->assertEquals($response->validation->name[0], "The name may not be greater than 25 characters.");
+        $this->assertEquals($response->validation->address[0], "The address field is required.");
+        $this->assertEquals($response->validation->latitude[0], "The latitude field is required.");
+        $this->assertEquals($response->validation->longitude[0], "The longitude field is required.");
+        $this->assertEquals($response->validation->mobile[0], "The mobile must be between 7 and 15 digits.");
     }
 }
