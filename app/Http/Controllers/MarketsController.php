@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\MarketService;
 use Validator;
-use Input;
 
 class MarketsController extends Controller
 {
