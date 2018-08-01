@@ -20,7 +20,7 @@ services:
       dockerfile: web.dockerfile
     working_dir: /var/www
     ports:
-      - 8080:80
+      - 80:80
     depends_on:
       - app
       - mysqldb
@@ -38,7 +38,7 @@ services:
           - MYSQL_USER=${DB_USERNAME}
           - MYSQL_PASSWORD=${DB_PASSWORD}
       ports:
-          - "3306:3306"
+          - "3307:3306"
       volumes:
           - "/Users/ahmedalawady/Workspace/crowdanalyzer/dump/mysql:/var/lib/mysql"
 
