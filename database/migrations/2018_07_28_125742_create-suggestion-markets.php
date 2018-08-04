@@ -19,6 +19,7 @@ class CreateSuggestionMarkets extends Migration
             $table->string('mobile')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->point('location')->nullable();
             $table->string('note')->nullable();
             $table->integer('status')->nullable();
             $table->unsignedInteger('user_id')->nullable();
@@ -29,8 +30,6 @@ class CreateSuggestionMarkets extends Migration
             $table->collation = 'utf8_general_ci';
             $table->foreign('user_id')->references('id')->on('users');
         });
-
-        DB::statement('ALTER TABLE suggestion_markets ADD location POINT null');
     }
 
     /**
