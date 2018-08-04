@@ -21,6 +21,7 @@ class CreateMarkets extends Migration
             $table->string('mobile')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->point('location')->nullable();
             $table->string('delivery_speed')->nullable();
             $table->string('accuracy')->nullable();
             $table->string('min_charge')->nullable();
@@ -31,8 +32,6 @@ class CreateMarkets extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
         });
-
-        DB::statement('ALTER TABLE markets ADD location POINT null');
     }
 
     /**

@@ -32,12 +32,15 @@ class MarketsController extends Controller
 
         $validationRules = array(
             'name' => 'required|min:2|max:25',
-            'address' => 'required',
+            'address' => 'sometimes|required',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'mobile' => 'digits_between:7,15',
-            'phone' => 'digits_between:7,15',
+            'mobile' => 'sometimes|required|digits_between:7,15',
+            'phone' => 'sometimes|required|digits_between:7,15',
+            'note' => 'sometimes|required'
         );
+
+        $request->merge(array_map('trim', $request->all()));
 
         $validator = Validator::make($request->all(), $validationRules);
         if ($validator->fails()) {
