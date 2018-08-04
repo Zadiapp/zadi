@@ -53,7 +53,7 @@ class MarketsTest extends TestCase
     public function testValidationNumber() {
         $responseRegistration = $this->post(
             '/api/register-guest', 
-            ['device_id' => '463773737373', 'language' => 'en']
+            ['device_id' => '463773737373', 'language' => 'en', 'latitude' => '2111.22', 'longitude' => '31.5444']
         )->response->getContent();
         
         $responseRegistration = json_decode($responseRegistration);

@@ -26,8 +26,8 @@ class AuthController extends Controller
         $validationRules = array(
             'device_id' => 'required',
             'language' => 'required|in:en,ar',
-            'latitude' => 'numeric',
-            'longitude' => 'numeric'
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric'
         );
 
         $request->merge(array_map('trim', $request->all()));
