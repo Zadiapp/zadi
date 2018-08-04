@@ -25,14 +25,13 @@ class Market extends Model
             )
         );
 
-        $location = new \stdClass();;
-
-       if(empty($response)) {
-           dd($response);
-            $location->type = 'point';
-            $location->coordinates = $response;
-       } 
-       dd($response);
+        $location = new \stdClass();
+       
+        if(!empty($response)) {
+             $location->latitude = $response[0];
+             $location->longitude = $response[1];
+        } 
+        
         return $location;
     }
 

@@ -30,6 +30,8 @@ class AuthController extends Controller
             'longitude' => 'numeric'
         );
 
+        $request->merge(array_map('trim', $request->all()));
+        
         $validator = Validator::make($request->all(), $validationRules);
         if ($validator->fails()) {
             return $this->GetErrorResponse($validator->errors(), null, 400);
