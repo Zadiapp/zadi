@@ -25,7 +25,15 @@ class Market extends Model
             )
         );
 
-        return $response;
+        $location = new \stdClass();;
+
+       if(empty($response)) {
+           dd($response);
+            $location->type = 'point';
+            $location->coordinates = $response;
+       } 
+       dd($response);
+        return $location;
     }
 
     public function announcements() {
