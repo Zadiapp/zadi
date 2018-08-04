@@ -125,7 +125,8 @@ class MarketsTest extends TestCase
     public function testSuggestValidation(string $token) {
         $params = [
             'name' => 'SuperMareeeeewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwket',
-            'mobile' => '0'
+            'mobile' => '0',
+            'note' => '  '
         ];
         $response = $this->call('POST','/api/markets/suggest',
             $params,[],[],['HTTP_Authorization' => 'Bearer ' . $token],[]);
@@ -137,9 +138,9 @@ class MarketsTest extends TestCase
         $this->assertEquals($response->itemsCount, null);
         $this->assertTrue(is_object($response->validation));
         $this->assertEquals($response->validation->name[0], "The name may not be greater than 25 characters.");
-        $this->assertEquals($response->validation->address[0], "The address field is required.");
         $this->assertEquals($response->validation->latitude[0], "The latitude field is required.");
         $this->assertEquals($response->validation->longitude[0], "The longitude field is required.");
         $this->assertEquals($response->validation->mobile[0], "The mobile must be between 7 and 15 digits.");
+        $this->assertEquals($response->validation->note[0], "The note field is required.");
     }
 }
