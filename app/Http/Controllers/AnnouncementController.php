@@ -21,6 +21,6 @@ class AnnouncementController extends Controller
         }
 
         $announcement = (new AnnouncementService())->getMarketAnnouncement($market_id);
-        return $this->getSuccResponse($announcement);
+        return $this->getSuccResponse($announcement, 1);
     }
 }

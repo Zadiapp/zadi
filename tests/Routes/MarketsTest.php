@@ -143,4 +143,21 @@ class MarketsTest extends TestCase
         $this->assertEquals($response->validation->mobile[0], "The mobile must be between 7 and 15 digits.");
         $this->assertEquals($response->validation->note[0], "The note field is required.");
     }
+
+    /**
+     * @depends testValidationNumber
+    */
+    public function testAnnouncementValidation(string $token) {
+        $response = $this->get(
+            '/api/markets/announcement/1', 
+            ['HTTP_Authorization' => 'Bearer' . $token]
+        )->response->getContent();
+        
+        $response = json_decode($response);
+        
+        $this->assertEquals($response->status, true);
+        $this->assertEquals($response->validation, null);
+        $this->assertEquals($response->itemsCount, 1);
+        $this->assertEquals($response->data, "Offer 30%");
+    }
 }
