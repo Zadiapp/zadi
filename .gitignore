@@ -7,3 +7,4 @@ Homestead.yaml
 .env
 ./public/vendor/l5-swagger
 ./resources/views/vendor/l5-swagger
+.DS_Store
