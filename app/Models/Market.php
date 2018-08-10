@@ -10,6 +10,15 @@ class Market extends Model
         'location',
     ];
 
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Category');
+    }
+
+    public function announcements() {
+        return $this->hasMany('App\Models\Announcement');
+    }
+
     function getLocationAttribute($value) {
         $response = explode(
             ' ',
@@ -33,9 +42,5 @@ class Market extends Model
         } 
         
         return $location;
-    }
-
-    public function announcements() {
-        return $this->hasMany('App\Models\Announcement');
     }
 }
