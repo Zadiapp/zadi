@@ -20,7 +20,7 @@ class CategoriesController extends Controller
             return $this->GetErrorResponse($validator->errors(), null, 400);
         }
 
-        $categories = (new CategoryService())->getCategories($marketId, $pageIndex, $pageSize);
+        $categories = (new CategoryService())->getMarketCategories($marketId, $pageIndex, $pageSize);
         return $this->getSuccResponse($categories['data'], $categories['total']);
     }
 }

@@ -19,7 +19,7 @@ Route::group(['prefix' => 'markets','middleware' => ['jwt.auth']],  function () 
     Route::get('nearby', 'MarketsController@nearBy');
     Route::post('suggest', 'MarketsController@suggestMarket');
     Route::get('announcement/{market_id}', 'AnnouncementController@get');
-    Route::get('categories/{market_id}/{}', 'CategoriesController@get');
+    Route::get('categories/{market_id}/{pageIndex?}/{pageSize?}', 'CategoriesController@get');
     
 });
 
