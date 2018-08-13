@@ -19,6 +19,18 @@ class Market extends Model
         return $this->hasMany('App\Models\Announcement');
     }
 
+    public function paymentMethods() {
+        return $this->hasMany('App\Models\PaymentMethod');
+    }
+
+    function getPaymentMethodIdAttribute($value) {
+        if(isset(\Config::get('constants.paymentMethods')[$value])) {
+           return \Config::get('constants.paymentMethods')[$value];
+        }
+   
+        return NULL;
+    }
+
     function getLocationAttribute($value) {
         $response = explode(
             ' ',
