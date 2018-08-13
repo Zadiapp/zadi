@@ -6,22 +6,28 @@ class MarketService{
 
     public function nearBy($lat, $lng) {
         $config = \App\Models\AppConfig::select('distance')->first(); 
-        $markets = \DB::table('markets')->select(
-            \DB::raw('id, name, email, opening_hour, mobile, phone,
-                address, ST_X(location) AS latitude,  ST_Y(location) AS longitude,
-                delivery_speed, accuracy, min_charge, 
-                IF(logo IS NULL, "'.url('images/markets/default.jpg').'", CONCAT("'.url('/').'", logo)) as logo , (
-                6371 * acos (
-                cos ( radians('.$lat.') )
-                * cos( radians( ST_X(location) ) )
-                * cos( radians( ST_Y(location) ) - radians('.$lng.') )
-                + sin ( radians('.$lat.') )
-                * sin( radians( ST_X(location) ) )
-              )
-          ) AS distance')
-        )->having('distance', '<', $config->distance)->orderBy('distance')->get();
-
-        return $markets;
+        $markets = \App\Models\Market::having('distance', '<', $config->distance)
+        ->orderBy('distance')
+        ->get([\DB::raw('markets.id AS id, name, email, opening_hour, mobile, phone,
+        address, ST_X(location) AS latitude,  ST_Y(location) AS longitude,
+        delivery_speed, accuracy, min_charge, 
+        IF(logo IS NULL, "'.url('images/markets/default.jpg').'", CONCAT("'.url('/').'", logo)) as logo ,
+        IF(cover_photo IS NULL, "'.url('images/markets/cover_photo_default.jpg').'", CONCAT("'.url('images/markets/').'", cover_photo)) as cover_photo , (
+        6371 * acos (
+        cos ( radians('.$lat.') )
+        * cos( radians( ST_X(location) ) )
+        * cos( radians( ST_Y(location) ) - radians('.$lng.') )
+        + sin ( radians('.$lat.') )
+        * sin( radians( ST_X(location) ) )
+      )
+     ) AS distance')]);
+     
+     $markets = $markets->map(function($item, $key) {
+         $item->payments = \App\Models\PaymentMethod::where('market_id', $item->id)->pluck('payment_method_id');
+         return $item;
+     });
+    
+     return $markets;
     }
 
     public function createSuggestionMarket($suggestMarket, $userId) {
