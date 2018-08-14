@@ -22,4 +22,19 @@ class ItemsController extends Controller
         $items = (new ItemService())->getMarketItems($marketId, $pageIndex, $pageSize);
         return $this->getSuccResponse($items['data'], $items['total']);
     }
+
+    public function getPopularItems($marketId, $pageIndex = 1,$pageSize = 20)
+    {
+        $validationRules = array(
+            'market_id' => 'required|exists:markets,id',
+        );
+
+        $validator = Validator::make(['market_id' => $marketId], $validationRules);
+        if ($validator->fails()) {
+            return $this->GetErrorResponse($validator->errors(), null, 400);
+        }
+
+        $items = (new ItemService())->getPopularItems($marketId, $pageIndex, $pageSize);
+        return $this->getSuccResponse($items['data'], $items['total']);
+    }
 }
