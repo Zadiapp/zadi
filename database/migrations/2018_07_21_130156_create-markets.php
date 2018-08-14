@@ -26,6 +26,7 @@ class CreateMarkets extends Migration
             $table->string('accuracy')->nullable();
             $table->string('min_charge')->nullable();
             $table->string('logo')->nullable();
+            $table->string('cover_photo')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->engine = 'InnoDB';
