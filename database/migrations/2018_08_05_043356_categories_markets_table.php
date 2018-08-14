@@ -17,7 +17,7 @@ class CategoriesMarketsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('market_id')->nullable();
             $table->unsignedInteger('category_id')->nullable();
-            $table->integer('status')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->engine = 'InnoDB';

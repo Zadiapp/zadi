@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Services\CategoryService;
+use App\Services\ItemService;
 use Validator;
 
-class CategoriesController extends Controller
+class ItemsController extends Controller
 {
     public function get($marketId, $pageIndex = 1,$pageSize = 20)
     {
@@ -19,7 +19,7 @@ class CategoriesController extends Controller
             return $this->GetErrorResponse($validator->errors(), null, 400);
         }
 
-        $categories = (new CategoryService())->getMarketCategories($marketId, $pageIndex, $pageSize);
-        return $this->getSuccResponse($categories['data'], $categories['total']);
+        $items = (new ItemService())->getMarketItems($marketId, $pageIndex, $pageSize);
+        return $this->getSuccResponse($items['data'], $items['total']);
     }
 }

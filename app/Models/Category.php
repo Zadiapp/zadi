@@ -13,7 +13,7 @@ class Category extends Model
             return url('images/categories/'.$value);
         }
 
-        return url('images/categories/default.png');
+        return url('images/default.png');
     }
 }
 

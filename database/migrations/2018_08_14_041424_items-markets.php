@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Announcment extends Migration
+class ItemsMarkets extends Migration
 {
     /**
      * Run the migrations.
@@ -14,17 +14,20 @@ class Announcment extends Migration
     public function up()
     {
         //
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::create('items_markets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('text');
-            $table->tinyInteger('status')->nullable();
             $table->unsignedInteger('market_id')->nullable();
+            $table->unsignedInteger('item_id')->nullable();
+            $table->string('price')->nullable();
+            $table->tinyInteger('status')->nullable();
+            $table->enum('popular', [0, 1])->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->foreign('market_id')->references('id')->on('markets');
+            $table->foreign('item_id')->references('id')->on('items');
         });
     }
 
@@ -36,10 +39,11 @@ class Announcment extends Migration
     public function down()
     {
         //
-        Schema::table('announcements', function (Blueprint $table) {
+        Schema::table('items_markets', function (Blueprint $table) {
             $table->dropForeign(['market_id']);
+            $table->dropForeign(['item_id']);
         });
 
-        Schema::dropIfExists('announcements');
+        Schema::dropIfExists('items_markets');
     }
 }
