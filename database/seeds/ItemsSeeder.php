@@ -16,7 +16,7 @@ class ItemsSeeder extends Seeder
             [
                 'name' => 'Pepsi Cola 1 liter - Plastic Bottle, 6 Pieces',
                 'name_ar' => ' بيبسي كولا 1 لتر - عبوة بلاستيكية، 6 زجاجات',
-                'image' => 'peopsi.jpg',
+                'image' => 'pepsi.jpg',
                 'category_id' => '1',
                 'status' => Config::get('constants.categoryStatus.active')
             ],
