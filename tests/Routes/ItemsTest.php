@@ -79,4 +79,28 @@ class ItemsTest extends TestCase
             $this->assertObjectHasAttribute('price', $response->data[$i]);
         }
     }
+
+    /**
+     * @depends testValidationRequired
+    */
+    public function testGetPopularItemsPagination(string $token) {
+        $response = $this->get(
+            '/api/markets/popular-items/1', 
+            ['HTTP_Authorization' => 'Bearer' . $token]
+        )->response->getContent();
+        
+        $response = json_decode($response);
+        
+        $this->assertEquals($response->status, true);
+        $this->assertEquals($response->validation, null);
+        $this->assertEquals($response->itemsCount, 5);
+        $this->assertEquals(count($response->data), 5);
+        for($i = 0; $i < count($response->data); $i++) {
+            $this->assertObjectHasAttribute('item_id', $response->data[$i]);
+            $this->assertObjectHasAttribute('name', $response->data[$i]);
+            $this->assertObjectHasAttribute('name_ar', $response->data[$i]);
+            $this->assertObjectHasAttribute('image', $response->data[$i]);
+            $this->assertObjectHasAttribute('price', $response->data[$i]);
+        }
+    }
 }

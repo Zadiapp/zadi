@@ -21,5 +21,7 @@ Route::group(['prefix' => 'markets','middleware' => ['jwt.auth']],  function () 
     Route::get('announcement/{market_id}', 'AnnouncementController@get');
     Route::get('categories/{market_id}/{pageIndex?}/{pageSize?}', 'CategoriesController@get');
     Route::get('items/{market_id}/{pageIndex?}/{pageSize?}', 'ItemsController@get');
+    Route::get('popular-items/{market_id}/{pageIndex?}/{pageSize?}', 'ItemsController@getPopularItems');
+
 });
 
