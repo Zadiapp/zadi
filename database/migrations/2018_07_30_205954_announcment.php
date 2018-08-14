@@ -17,7 +17,7 @@ class Announcment extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->increments('id');
             $table->string('text');
-            $table->integer('status')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->unsignedInteger('market_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

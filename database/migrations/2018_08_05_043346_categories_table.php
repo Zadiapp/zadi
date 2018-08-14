@@ -20,7 +20,7 @@ class CategoriesTable extends Migration
             $table->text('description');
             $table->text('description_ar');
             $table->string('image');
-            $table->integer('status')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->engine = 'InnoDB';

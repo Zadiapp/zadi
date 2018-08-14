@@ -21,7 +21,7 @@ class CreateSuggestionMarkets extends Migration
             $table->string('address')->nullable();
             $table->point('location')->nullable();
             $table->string('note')->nullable();
-            $table->integer('status')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
