@@ -9,6 +9,22 @@ use Validator;
 
 class MarketsController extends Controller
 {
+    public function home($marketId)
+    {
+        $validationRules = array(
+            'market_id' => 'required|exists:markets,id',
+        );
+
+        $validator = Validator::make(['market_id' => $marketId], $validationRules);
+        if ($validator->fails()) {
+            return $this->GetErrorResponse($validator->errors(), null, 400);
+        }
+
+        $market = new MarketService();
+
+        return $this->getSuccResponse($market->home($marketId));
+    }
+
     public function nearBy(Request $request)
     {
         $validationRules = array(

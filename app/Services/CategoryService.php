@@ -11,7 +11,8 @@ class CategoryService{
             ->where('categories_markets.status', \Config::get('constants.categoryStatus.active'));
 
         $totalCount = $categories->count();
-        $data = $categories->skip(($pageIndex-1)*$pageSize)->take($pageSize)->get(array('category_id', 'name', 'name_ar', 'description', 'description_ar', 'image'));
+        $data = $categories->skip(($pageIndex-1)*$pageSize)->take($pageSize)
+            ->get(array('category_id', 'name', 'name_ar', 'description', 'description_ar', 'image'));
 
         return ['data'=>$data , 'total' => $totalCount];
     }
