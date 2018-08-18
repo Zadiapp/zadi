@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ItemsTable extends Migration
+class CreateSizeCatgoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,19 +14,17 @@ class ItemsTable extends Migration
     public function up()
     {
         //
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('size_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('name_ar');
-            $table->string('image');
-            $table->tinyInteger('status')->nullable();
-            $table->unsignedInteger('category_id')->nullable();
+            $table->string('title');
+            $table->string('title_ar');
+            $table->string('unit');
+            $table->string('unit_ar');
             $table->timestamps();
             $table->softDeletes();
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -38,10 +36,6 @@ class ItemsTable extends Migration
     public function down()
     {
         //
-        Schema::table('items', function (Blueprint $table) {
-            $table->dropForeign(['category_id']);
-        });
-
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('size_types');
     }
 }
