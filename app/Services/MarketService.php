@@ -40,4 +40,34 @@ class MarketService{
         
         return \App\Models\SuggestionMarket::create($suggestMarket);
     }
+
+    public function home($marketId) {
+        $home = new \stdClass(); 
+        $home->categories = [];
+        $home->popular = [];
+        $home->recent = [];
+        $home->top_search = [];
+        $home->offers = [];
+        $itemService = new ItemService();
+        $categoryService = new CategoryService();
+
+        $firstFiveCategory = $categoryService->getMarketCategories($marketId, 1, 10);
+        if(isset($firstFiveCategory['data'])) {
+            $firstFiveCategory['data']->map(function($item, $key) use ($itemService, $marketId) {
+                $item->items = $itemService->getMarketCategoryItems($marketId, $item->category_id, 1, 5)['data'];
+                return $item;
+            });
+            $home->categories = $firstFiveCategory['data'];
+        }
+        
+        $popularItems = $itemService->getPopularItems($marketId, 1, 10);
+
+        if(isset($popularItems['data'])) {
+            $home->popular = $popularItems['data'];
+        }
+        
+        $home->recent = $itemService->getRecentItems($marketId, 1, 10);
+        
+        return $home;
+    }
 }
