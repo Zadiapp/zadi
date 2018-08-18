@@ -18,6 +18,8 @@ class ItemsSeeder extends Seeder
                 'name_ar' => ' بيبسي كولا 1 لتر - عبوة بلاستيكية، 6 زجاجات',
                 'image' => 'pepsi.jpg',
                 'category_id' => '1',
+                'size' => '1',
+                'size_type' => 4,
                 'status' => Config::get('constants.categoryStatus.active')
             ],
             [
@@ -25,6 +27,8 @@ class ItemsSeeder extends Seeder
                 'name_ar' => 'حبوب قهوة محمصة , اسبريسو',
                 'image' => 'espresso.jpg',
                 'category_id' => '1',
+                'size' => '1',
+                'size_type' => 1,
                 'status' => Config::get('constants.categoryStatus.active')
             ],
             [
@@ -32,6 +36,8 @@ class ItemsSeeder extends Seeder
                 'name_ar' => 'مسحوق غسيل تايد اتوماتيك داوني، 2.5 كجم',
                 'image' => 'tide.jpg',
                 'category_id' => '2',
+                'size' => '2.5',
+                'size_type' => 1,
                 'status' => Config::get('constants.categoryStatus.active')
             ],
             [
@@ -39,6 +45,8 @@ class ItemsSeeder extends Seeder
                 'name_ar' => 'مسحوق برسيل للغسيل اليدوى بملايين الحبيبات المزيلة للبقع، 60 جم',
                 'image' => 'persil.jpg',
                 'category_id' => '2',
+                'size' => '60',
+                'size_type' => 2,
                 'status' => Config::get('constants.categoryStatus.active')
             ],
             [
@@ -46,6 +54,8 @@ class ItemsSeeder extends Seeder
                 'name_ar' => 'مكرونة هلاليه صغيرة من ستار، 10 مم',
                 'image' => 'star_pasta.jpg',
                 'category_id' => '3',
+                'size' => '10',
+                'size_type' => 5,
                 'status' => Config::get('constants.categoryStatus.active')
             ],
             [
@@ -53,6 +63,8 @@ class ItemsSeeder extends Seeder
                 'name_ar' => 'المطبخ مكرونة اسباجيتي، 400 جرام',
                 'image' => 'elmatbakh.jpg',
                 'category_id' => '3',
+                'size' => '60',
+                'size_type' => 2,
                 'status' => Config::get('constants.categoryStatus.active')
             ],
             [
@@ -60,6 +72,8 @@ class ItemsSeeder extends Seeder
                 'name_ar' => 'رقائق شوفان بايو اورجانيك من كلاس ايه - 500 جم',
                 'image' => 'organic_bio.jpg',
                 'category_id' => '4',
+                'size' => '500',
+                'size_type' => 2,
                 'status' => Config::get('constants.categoryStatus.active')
             ],
             [
@@ -67,6 +81,8 @@ class ItemsSeeder extends Seeder
                 'name_ar' => 'شا من حلو الشام - 150 جم',
                 'image' => 'holw.jpg',
                 'category_id' => '4',
+                'size' => '150',
+                'size_type' => 2,
                 'status' => Config::get('constants.categoryStatus.active')
             ],
             [
@@ -74,6 +90,8 @@ class ItemsSeeder extends Seeder
                 'name_ar' => 'سمنة روابى-1.5 كجم',
                 'image' => 'rawaby.jpg',
                 'category_id' => '5',
+                'size' => '1.5',
+                'size_type' => 1,
                 'status' => Config::get('constants.categoryStatus.active')
             ],
             [
@@ -81,6 +99,8 @@ class ItemsSeeder extends Seeder
                 'name_ar' => 'زيت عباد الشمس أصيل, 2.25 لتر',
                 'image' => 'asil.jpg',
                 'category_id' => '5',
+                'size' => '2.25',
+                'size_type' => 4,
                 'status' => Config::get('constants.categoryStatus.active')
             ],
         ]);

@@ -48,9 +48,9 @@ class ItemsTest extends TestCase
         $this->assertEquals(count($response->data), 10);
         for($i = 0; $i < count($response->data); $i++) {
             $this->assertObjectHasAttribute('item_id', $response->data[$i]);
-            $this->assertObjectHasAttribute('name', $response->data[$i]);
-            $this->assertObjectHasAttribute('name_ar', $response->data[$i]);
-            $this->assertObjectHasAttribute('image', $response->data[$i]);
+            $this->assertObjectHasAttribute('item_name', $response->data[$i]);
+            $this->assertObjectHasAttribute('item_name_ar', $response->data[$i]);
+            $this->assertObjectHasAttribute('item_image', $response->data[$i]);
             $this->assertObjectHasAttribute('price', $response->data[$i]);
         }
     }
@@ -73,9 +73,9 @@ class ItemsTest extends TestCase
         $this->assertEquals($response->data[0]->item_id, 3);
         for($i = 0; $i < count($response->data); $i++) {
             $this->assertObjectHasAttribute('item_id', $response->data[$i]);
-            $this->assertObjectHasAttribute('name', $response->data[$i]);
-            $this->assertObjectHasAttribute('name_ar', $response->data[$i]);
-            $this->assertObjectHasAttribute('image', $response->data[$i]);
+            $this->assertObjectHasAttribute('item_name', $response->data[$i]);
+            $this->assertObjectHasAttribute('item_name_ar', $response->data[$i]);
+            $this->assertObjectHasAttribute('item_image', $response->data[$i]);
             $this->assertObjectHasAttribute('price', $response->data[$i]);
         }
     }
